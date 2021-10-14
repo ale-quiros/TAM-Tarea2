@@ -1,12 +1,12 @@
 /// <reference types="Cypress" />
 
-describe('Tarea2', () => {
+describe('Ejercicios resueltos de la Tarea2', () => {
   // Hooks
   beforeEach(() => {
     cy.visit('/challenges/actions');
   });
 
-  context('Ejercicio1', () => {
+  context('Ejercicio 1: Typing and sending keys:', () => {
     it('should complete Exercise 1', () => {
       const EMAIL_ADDRESS = "fake@email.com";
       const DISABLED_TEXT = "Text typed inside disabled textarea";
@@ -24,7 +24,7 @@ describe('Tarea2', () => {
     });
   });
 
-  context('Ejercicio2 parte 1', () => {
+  context('Ejercicio 2 Part 1: Focus', () => {
     it('should complete Exercise 2 - Part 1', () => {
       cy.get('#password1')
       .focus()
@@ -33,7 +33,7 @@ describe('Tarea2', () => {
      });
   });
 
-  context('Ejercicio2 parte2', () => {
+  context('Ejercicio2 Part 2: Blur', () => {
     it('should complete Exercise 2 - Part 2', () => {
       cy.get('#fullName1')
       .focus()
@@ -44,7 +44,7 @@ describe('Tarea2', () => {
     });
   });
 
-  context('Ejercicio3', () => {
+  context('Ejercicio3:  Submitting a form:', () => {
     it('should complete Exercise 3', () => {
       const SUBMITED_MESSAGE = 'Your form has been submitted!'
       const CUPON_INFO = "123456";
@@ -84,15 +84,15 @@ describe('Tarea2', () => {
     });
   });
 
-  context('Ejercicio5', () => {
-    it('should complete Exercise 5', () => {
+  context('Ejercicio5  Double click element', () => {
+    it('should complete Exercise 5: ', () => {
       cy.get('.action-div').dblclick();
       cy.get('input[value="Double click to edit"]').should('be.visible');
     });
   });
 
-  context('Ejercicio6', () => {
-    it('should complete Exercise 5', () => {
+  context('Ejercicio6: Right click element', () => {
+    it('should complete Exercise 6:', () => {
       cy.get('.rightclick-action-div').rightclick();
       cy.get('input[value="Right click to edit"]').should('be.visible');
     });
