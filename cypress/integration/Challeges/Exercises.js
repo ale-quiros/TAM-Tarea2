@@ -11,11 +11,12 @@ describe('Tarea2', () => {
       const EMAIL_ADDRESS = "fake@email.com";
       const DISABLED_TEXT = "Text typed inside disabled textarea";
 
-      cy.get('#email1').clear().type(EMAIL_ADDRESS);
-      cy.get('#email1').should('have.value', EMAIL_ADDRESS);
-      cy.get('#email1').type('{ctrl+a}{del}');
-      cy.get('#email1').clear();
-      cy.get('#email1').should('have.value', '');
+      cy.get('#email1')
+      .clear().type(EMAIL_ADDRESS)
+      .should('have.value', EMAIL_ADDRESS)
+      .type('{ctrl+a}{del}')
+      .clear()
+      .should('have.value', '');
 
       cy.get('.action-disabled')
       .type(DISABLED_TEXT, { force: true })
@@ -53,6 +54,33 @@ describe('Tarea2', () => {
       cy.get('div[data-exercise="3"]')
       .should('contain', SUBMITED_MESSAGE)
       .and('be.visible')
+    });
+  });
+
+  context('Ejercicio4 Part 1: Popover and canvas', () => {
+    it('should complete Exercise 4', () => {
+
+      cy.get('button[class="btn btn-lg btn-danger action-btn"]').click();
+      cy.get('div[class="popover fade top in"]').should('be.visible');
+      cy.get('#action-canvas')
+      .click(80, 75)
+      .click(170, 75)
+      .click(80, 165)
+      .click(100, 185)
+      .click(125, 190)
+      .click(150, 185)
+      .click(170, 165)
+    });
+  });
+
+  context('Ejercicio4 Part 2: Multiple clicks and force', () => {
+    it('should complete Exercise 4', () => {
+      //click on each children
+      cy.get('.action-labels').children().click({ multiple: true });
+
+      //click on the hidden button
+      cy.get('button[class="btn btn-lg btn-primary"]').click({ force: true });
+      cy.get('.popover-content').contains("This popover shows up because we forced the click on the button").should('be.visible');
     });
   });
 
