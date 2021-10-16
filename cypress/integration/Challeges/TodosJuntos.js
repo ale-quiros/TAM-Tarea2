@@ -10,12 +10,12 @@ describe('Ejercicios resueltos de la Tarea2', () => {
     it('should complete Exercise 1', () => {
       const EMAIL_ADDRESS = "fake@email.com";
       const DISABLED_TEXT = "Text typed inside disabled textarea";
-
+      
       cy.get('#email1')
       .clear().type(EMAIL_ADDRESS)
       .should('have.value', EMAIL_ADDRESS)
-      .type('{ctrl+a}{del}')
-      .clear()
+      .type('{selectall}',{ force: true })
+      .type('{del}')
       .should('have.value', '');
 
       cy.get('.action-disabled')
@@ -47,7 +47,7 @@ describe('Ejercicios resueltos de la Tarea2', () => {
   context('Ejercicio3:  Submitting a form:', () => {
     it('should complete Exercise 3', () => {
       const SUBMITED_MESSAGE = 'Your form has been submitted!'
-      const CUPON_INFO = "123456";
+      const CUPON_INFO = "Cupon456";
 
       cy.get('#couponCode1').clear().type(CUPON_INFO);
       cy.get('#couponCode1').clear().type('{enter}');
@@ -75,12 +75,17 @@ describe('Ejercicios resueltos de la Tarea2', () => {
 
   context('Ejercicio4 Part 2: Multiple clicks and force', () => {
     it('should complete Exercise 4', () => {
+      const CLICKED_MESSAGE = "clicked";
+      const HIDDEN_BUTTON_CLICKED = "This popover shows up because we forced the click on the button";
       //click on each children
-      cy.get('.action-labels').children().click({ multiple: true });
+      cy.get('.action-labels').children().each(($el, index, $list) => {
+        cy.wrap($el).click();
+        cy.wrap($el).next().should('contain', CLICKED_MESSAGE)
+      });
 
       //click on the hidden button
       cy.get('button[class="btn btn-lg btn-primary"]').click({ force: true });
-      cy.get('.popover-content').contains("This popover shows up because we forced the click on the button").should('be.visible');
+      cy.get('.popover-content').contains(HIDDEN_BUTTON_CLICKED).should('be.visible');
     });
   });
 
